@@ -1,34 +1,63 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
+
+import LoginView from './src/views/LoginView/LoginView';
+import {NavigationContainer} from '@react-navigation/native';
 
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-} from 'react-native';
+  createBottomTabNavigator,
+  BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
+import HomeView from './src/views/HomeView/HomeView';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import LoginView from './src/views/LoginView/LoginView';
+const HomeTabBarIcon = ({
+  color,
+  size,
+}: {
+  color: string;
+  size: number;
+}): ReactNode => (
+  <MaterialCommunityIcons name="home" color={color} size={size} />
+);
+
+const LoginTabBarIcon = ({
+  color,
+  size,
+}: {
+  color: string;
+  size: number;
+}): ReactNode => (
+  <MaterialCommunityIcons name="lock" color={color} size={size} />
+);
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const Tab = createBottomTabNavigator();
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const tabBarOptionsHome: BottomTabNavigationOptions = {
+    tabBarLabel: 'Home',
+    tabBarIcon: HomeTabBarIcon,
+  };
+
+  const tabBarOptionsLogin: BottomTabNavigationOptions = {
+    tabBarLabel: 'Login',
+    tabBarIcon: LoginTabBarIcon,
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <LoginView />
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Login"
+          component={LoginView}
+          options={tabBarOptionsLogin}
+        />
+        <Tab.Screen
+          name="Home"
+          component={HomeView}
+          options={tabBarOptionsHome}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

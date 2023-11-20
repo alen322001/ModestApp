@@ -10,13 +10,12 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Text, withTheme} from 'react-native-paper';
 import {ThemeProp} from 'react-native-paper/lib/typescript/types';
-import {styles} from './LoginViewStyle';
 
 interface PaymentScreenProps {
   theme: ThemeProp;
 }
 
-const LoginView: React.FC<PaymentScreenProps> = ({theme}) => {
+const HomeView: React.FC<PaymentScreenProps> = ({theme}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -33,13 +32,11 @@ const LoginView: React.FC<PaymentScreenProps> = ({theme}) => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <View style={{backgroundColor: theme.colors?.primary}}>
-          <Text variant="headlineLarge" style={styles.header}>
-            Modest App
-          </Text>
+          <Text variant="headlineLarge">Home</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default withTheme(LoginView);
+export default withTheme(HomeView);
