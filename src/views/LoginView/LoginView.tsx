@@ -16,6 +16,26 @@ interface PaymentScreenProps {
   theme: ThemeProp;
 }
 
+const doThis = () => {
+  console.log('do this');
+};
+
+const doThat = () => {
+  console.log('doThat');
+};
+
+const testFunc = () => {
+  if ('yes') {
+    doThis();
+  } else {
+    doThat();
+  }
+};
+
+useEffect(() => {
+  testFunc();
+}, []);
+
 const LoginView: React.FC<PaymentScreenProps> = ({theme}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
